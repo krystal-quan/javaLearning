@@ -49,4 +49,13 @@ public class Transaction {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
+    /**
+     * Khoi tao transaction.
+     */
+    public Transaction(String operation, double amount, double balance) {
+      this.operation = operation;
+      this.amount = amount;
+      this.balance = balance;
+    }
 }
