@@ -1,26 +1,9 @@
-public class Circle {
-    private double radius = 1.0;
-    private String color = "red";
-    static final double PI = 3.1415;
-
-    public double getRadius() {
-        return radius;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
+public class Circle extends Shape {
+    protected Point center;
+    protected double radius;
 
     /**
-     * Circle no var.
+     * Circle 0 var.
      */
     public Circle() {
 
@@ -34,26 +17,82 @@ public class Circle {
     }
 
     /**
-     * Circle 2 var.
+     * Circle 3 var.
      */
-    public Circle(double radius, String color) {
-        this.color = color;
+    public Circle(double radius, String color, boolean filled) {
+        super(color, filled);
         this.radius = radius;
     }
 
     /**
-     * Area of the circle.
+     * Circle 3 var.
      */
-    public double getArea() {
-        return PI * radius * radius;
+    public Circle(Point center, double radius, String color, boolean filled) {
+        super(color, filled);
+        this.radius = radius;
+        this.center = center;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public Point getCenter() {
+        return center;
+    }
+
+    public void setCenter(Point center) {
+        this.center = center;
     }
 
     /**
-     * To string type.
+     * Abstract getArea.
      */
-    @Override
+    public double getArea() {
+        return radius * radius * Math.PI;
+    }
+
+    /**
+     * Abstract getPerimeter.
+     */
+    public double getPerimeter() {
+        return 2 * radius * Math.PI;
+    }
+
+    /**
+     * Override toString.
+     */
     public String toString() {
-        String temp = "Circle[radius=" + radius + ",color=" + color + "]";
-        return temp;
+        double temp1x = (double) ((int) center.getPointX() * 10) / 10.0;
+        double temp1y = (double) ((int) center.getPointY() * 10) / 10.0;
+        String temp = "Circle[center=(" + temp1x + "," + temp1y + ")";
+        temp = temp + ",radius=" + radius + ",color=" + super.getColor() + ",filled=";
+        return temp + super.isFilled() + "]";
+    }
+
+    /**
+     * Check equals.
+     */
+    public boolean equals(Object temp) {
+        if (temp instanceof Circle) {
+            if (this.hashCode() == temp.hashCode()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Hashcode var.
+     */
+    public int hashCode() {
+        return this.toString().hashCode();
     }
 }
